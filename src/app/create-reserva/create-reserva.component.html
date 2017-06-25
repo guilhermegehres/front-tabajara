@@ -1,0 +1,43 @@
+<app-menu-topo></app-menu-topo>
+<div class="container">
+  <div *ngIf="requisitando" class="alert alert-info">
+      <md-progress-bar mode="indeterminate"></md-progress-bar>
+  </div>
+  <md-card>
+    <md-card-title>Nova reserva</md-card-title>
+    <div *ngIf="valid != null || valid != ''" class="alert alert-danger">
+        {{valid}}
+    </div>
+    <md-grid-list cols="1" rowHeight="100px">
+      <md-grid-tile>
+        <md-input-container>
+          <input mdInput [mdDatepicker]="inicio" [(ngModel)]="dataInicio" (ngModelChange)="calcularValor(event)" placeholder="Data de inicio">
+          <button mdSuffix [mdDatepickerToggle]="inicio"></button>
+        </md-input-container>
+        <md-datepicker #inicio></md-datepicker>
+      </md-grid-tile>
+      <md-grid-tile>
+        <md-input-container>
+          <input mdInput [mdDatepicker]="fim" [(ngModel)]="dataFim" (ngModelChange)="calcularValor(event)" placeholder="Data de fim">
+          <button mdSuffix [mdDatepickerToggle]="fim"></button>
+        </md-input-container>
+        <md-datepicker #fim></md-datepicker>
+      </md-grid-tile>
+      <md-grid-tile>
+        <md-select placeholder="Apartamento" (change)="calcularValor(event)"  [(ngModel)]="apartamento">
+          <md-option *ngFor="let entry of apartamentos" [value]="entry">
+            {{ entry.tipo }} - {{ entry.valorDiaria | currency:'BRL':true:'2.2-2'}}
+          </md-option>
+        </md-select>
+      </md-grid-tile>
+      <md-grid-tile>
+        <md-input-container>
+          <input mdInput disabled [(ngModel)]="valor" placeholder="valor a ser calculado">
+        </md-input-container>
+      </md-grid-tile>
+      <md-grid-tile>
+        <a md-button (click)="salvarReserva()" class="alert-info">Salvar</a>
+      </md-grid-tile>
+    </md-grid-list>
+  </md-card>
+</div>

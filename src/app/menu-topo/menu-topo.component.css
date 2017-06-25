@@ -1,0 +1,7 @@
+md-nav-list{
+    padding-top: 0 !important;
+}
+li{
+    list-style: none;
+    display: inline;
+}

@@ -1,0 +1,26 @@
+<md-grid-list cols="3" rowHeight="300px">
+  <md-grid-tile></md-grid-tile>
+  <md-grid-tile>
+    <md-card>
+      <md-card-content class="card-login">
+        <md-card-title class="card-login__title">Login</md-card-title>
+        <div *ngIf="erro != null" class="alert alert-danger">
+          {{erro}}
+        </div>
+        <div *ngIf="requisitando" class="alert alert-info">
+          <md-progress-bar mode="indeterminate"></md-progress-bar>
+        </div>
+        <md-input-container>
+          <input mdInput placeholder="Email" [(ngModel)]="email" type="email">
+        </md-input-container>
+        <md-input-container>
+          <input mdInput placeholder="Senha" [(ngModel)]="senha" type="password">
+        </md-input-container>
+        <div>
+          <button md-button (click)="login()">Entrar</button>
+        </div>
+      </md-card-content>
+    </md-card>
+  </md-grid-tile>
+  <md-grid-tile></md-grid-tile>
+</md-grid-list>

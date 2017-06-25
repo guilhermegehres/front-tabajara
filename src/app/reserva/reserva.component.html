@@ -1,0 +1,64 @@
+<app-menu-topo></app-menu-topo>
+
+<div class="alert alert-success mensagem" *ngIf="msgSucesso != null">
+    {{msgSucesso}}
+</div>
+<div class="alert alert-danger mensagem" *ngIf="msgErro != null">
+    {{msgErro}}
+</div>
+<div *ngIf="requisitando" class="alert alert-info">
+    <md-progress-bar mode="indeterminate"></md-progress-bar>
+</div>
+<div class="botoes">
+    <a md-button routerLink="/newReserva">
+        <i class="material-icons">add</i>
+    </a>
+</div>
+<md-grid-list class="lista" cols="8" rowHeight="20px">
+  <md-grid-tile>ID</md-grid-tile>
+  <md-grid-tile>User</md-grid-tile>
+  <md-grid-tile>Apartamento</md-grid-tile>
+  <md-grid-tile>Data inicio</md-grid-tile>
+  <md-grid-tile>Data fim</md-grid-tile>
+  <md-grid-tile>Valor</md-grid-tile>
+  <md-grid-tile>Ações</md-grid-tile>
+  <md-grid-tile></md-grid-tile>
+</md-grid-list>
+
+<div *ngIf="listaReserva == undefined">
+    <md-grid-list cols="8" rowHeight="40px" *ngFor="let entry of listaReservas">
+        <div class="btn">
+            <md-grid-tile>{{ entry.id }}</md-grid-tile>
+            <md-grid-tile>{{ entry.user.nome }}</md-grid-tile>
+            <md-grid-tile>{{ entry.apartamento.tipo }}</md-grid-tile>
+            <md-grid-tile>{{ entry.dataInicio | date : "dd/MM/yyyy" }}</md-grid-tile>
+            <md-grid-tile>{{ entry.dataFim | date : "dd/MM/yyyy" }}</md-grid-tile>
+            <md-grid-tile>{{ entry.valor }}</md-grid-tile>
+            <md-grid-tile>
+                <div class="botoes" *ngIf="entry.reservado == 0">
+                    <a class="success" (click)="confirmaReserva(entry)">
+                        <i class="material-icons">done</i>
+                    </a>
+                    <a class="danger" (click)="cancelaReserva(entry.id)">
+                        <i class="material-icons">delete</i>
+                    </a>
+                </div>
+                <div *ngIf="entry.reservado == 1">
+                    <a class="info">
+                        <i class="material-icons">check_circle</i>
+                    </a>
+                </div>
+            </md-grid-tile>
+            <md-grid-tile>
+                <div class="botoes" *ngIf="idToDelete == entry.id">Excluir?
+                    <a class="success" (click)="confirmaDelete(idToDelete)">
+                        <i class="material-icons">done</i>
+                    </a>
+                    <a class="danger" (click)="cancelaDelete()">
+                        <i class="material-icons">highlight_off</i>
+                    </a>
+                </div>
+            </md-grid-tile>
+        </div>
+    </md-grid-list>
+</div>

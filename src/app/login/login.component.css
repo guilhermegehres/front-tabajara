@@ -1,0 +1,11 @@
+md-input-container{
+    width:100%;
+}
+
+.card-login__title{
+    text-align: center;
+}
+button{
+    background: #0097a7;
+    color: #fff;
+}

@@ -1,0 +1,9 @@
+.container{
+    width: 30%;
+    margin: auto;
+    padding: 20px 0; 
+}
+
+.container md-input-container, .container md-select{
+    width: 90%;
+}

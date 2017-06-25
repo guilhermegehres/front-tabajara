@@ -1,0 +1,35 @@
+md-grid-list:nth-child(even){
+    background-color:#f2f2f2; 
+    line-height: 40px;
+    border-radius: 2px;
+}
+md-grid-list{
+    font-family: calibri;
+}
+.lista{
+    margin-top: 20px;
+}
+
+.botoes{
+    margin:10px 0; 
+}
+.botoes a{
+    width: 30px;
+    background: #f2f2f2;
+}
+.mensagem{
+    margin:10px 0;
+}
+
+.btn{
+    cursor: pointer;
+}
+.success{
+    color: green; 
+}
+.danger{
+    color:coral; 
+}
+.info{
+    color:cornflowerblue; 
+}
