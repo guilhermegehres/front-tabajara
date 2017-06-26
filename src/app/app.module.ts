@@ -14,6 +14,7 @@ import { ReservaComponent } from './reserva/reserva.component';
 import { MenuTopoComponent } from './menu-topo/menu-topo.component';
 import { ReservaService } from './service/reserva.service';
 import { AluguelService } from './service/aluguel.service';
+import { UserService } from './service/user.service';
 import { UtilService } from './service/util.service';
 import { ApartamentoService } from './service/apartamento.service';
 import {MdDialog, OVERLAY_PROVIDERS, MdNativeDateModule} from '@angular/material';
@@ -50,7 +51,8 @@ import { NovoUserComponent } from './novo-user/novo-user.component';
     MdDialog, 
     OVERLAY_PROVIDERS,
     UtilService,
-    ApartamentoService
+    ApartamentoService,
+    UserService
    ],
   bootstrap: [AppComponent]
 })

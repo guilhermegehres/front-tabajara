@@ -9,3 +9,7 @@ button{
     background: #0097a7;
     color: #fff;
 }
+.nUser{
+    float: right;
+    margin-top: 10px;
+}

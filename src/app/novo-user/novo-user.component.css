@@ -1,0 +1,11 @@
+md-card{
+    width: 88%;
+    height: auto;
+}
+md-input-container{
+    width: 100%;
+}
+button{
+    background: #0097a7;
+    color: #fff;
+}

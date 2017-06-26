@@ -91,6 +91,10 @@ export class CreateReservaComponent implements OnInit {
       msg = msg + "Selecione um apartamento!";
       valido = false;
     } 
+    if(this.dataInicio > this.dataFim){
+      msg = msg + "A data de fim deve ser maior que a data de início!"
+      valido = false;
+    }
     this.msgErr = msg;
     return valido;
   }

@@ -1,3 +1,30 @@
-<p>
-  novo-user works!
-</p>
+<md-grid-list cols="3" rowHeight="480px">
+  <md-grid-tile></md-grid-tile>
+  <md-grid-tile>
+    <md-card>
+      <md-card-title>Novo usuário</md-card-title>
+      <div *ngIf="erro != null" class="alert alert-danger">
+        {{erro}}
+      </div>
+      <div *ngIf="requisitando" class="alert alert-info">
+        <md-progress-bar mode="indeterminate"></md-progress-bar>
+      </div>
+      <md-card-content>
+        <md-input-container>
+          <input mdInput placeholder="Nome" [(ngModel)]="nome">
+        </md-input-container>
+        <md-input-container>
+          <input mdInput placeholder="E-mail"  [(ngModel)]="email">
+        </md-input-container>
+        <md-input-container>
+          <input mdInput placeholder="Cpf" [(ngModel)]="cpf">
+        </md-input-container>
+        <md-input-container>
+          <input mdInput placeholder="Senha" type="password" [(ngModel)]="senha">
+        </md-input-container>
+        <button md-button (click)="createUser()">Pronto!</button>
+      </md-card-content>
+    </md-card>
+  </md-grid-tile>
+  <md-grid-tile></md-grid-tile>
+</md-grid-list>
