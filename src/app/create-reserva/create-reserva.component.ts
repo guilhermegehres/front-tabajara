@@ -16,7 +16,8 @@ export class CreateReservaComponent implements OnInit {
   private valor : any;
   private apartamento : any;
   private requisitando : boolean = false;
-  private valid : string = null;
+  private msgErr : string = null;
+  private msgSucesso : string = null;
   private reserva : any;
 
 
@@ -37,35 +38,36 @@ export class CreateReservaComponent implements OnInit {
       this.apartamentos = response;
       this.requisitando = false;
     })
-    .catch(() => {this.requisitando = false});
+    .catch(() => {
+      this.requisitando = false;
+      this.mostraErro("Ops, houve um erro, tente novamente!")
+    });
   }
 
   salvarReserva(){
-    this.valid = null;
-    if(this.validaCampos() == ""){
-      let user : any = window.localStorage.getItem("user");
+    this.msgErr = null;
+    if(this.validaCampos()){
+      let user : any = JSON.parse(window.localStorage.getItem("user"));
       this.valor = this.util.calculaDifData(this.dataInicio,this.dataFim) * this.apartamento.valorDiaria;
       this.reserva = {
         dataInicio : this.util.formataDataBanco(this.dataInicio),
         dataFim : this.util.formataDataBanco(this.dataFim),
         valor : this.valor,
-        user : {
-          id : user.id
-        },
-        apartamento : {
-          id : this.apartamento.id
-        }
+        user : user,
+        apartamento : this.apartamento,
+        reservado : 0
       };
-      console.log(this.reserva);
       this.requisitando = true;
       this.resService.createReserva(this.reserva)
       .then((response) => {
-        console.log(response);
         this.requisitando = false;
+        this.msgErr = null;
+        this.mostraSucesso("Reserva efetuada com sucesso");
       })
       .catch(() => { 
-        console.log("error");
         this.requisitando = false;
+        this.msgErr = null;
+        this.mostraErro("Ops, houve um erro no servidor, tente novamente ou entre em contato");
       })
     }
   }
@@ -76,17 +78,30 @@ export class CreateReservaComponent implements OnInit {
 
   validaCampos() : any{
     let msg : string = "";
+    let valido : boolean = true;
     if(this.dataInicio == "" || this.dataInicio == null || this.dataInicio == undefined){
-      msg = msg + "\nPreencha o campo data inicio!";
+      msg = msg + "Preencha o campo data inicio!";
+      valido = false;
     }
     if(this.dataFim == "" || this.dataFim == null || this.dataFim == undefined){
-      msg = msg + "<br />Preencha o campo data fim!";
+      msg = msg + "Preencha o campo data fim!";
+      valido = false;
     }
     if(this.apartamento == "" || this.apartamento == null || this.apartamento == undefined){
-      msg = msg + "\nSelecione um apartamento!";
+      msg = msg + "Selecione um apartamento!";
+      valido = false;
     } 
-    this.valid = msg;
-    return msg;
+    this.msgErr = msg;
+    return valido;
+  }
+
+  mostraSucesso(msg : string){
+    this.msgSucesso = msg;
+    setTimeout(() => this.msgSucesso = null , 3000);
+  }
+  mostraErro(msg : string){
+    this.msgErr = msg;
+    setTimeout(() => this.msgErr = null , 3000);
   }
 
 }

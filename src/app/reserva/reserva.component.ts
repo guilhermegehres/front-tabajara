@@ -18,6 +18,7 @@ export class ReservaComponent implements OnInit {
   private requisitando : boolean = false;
   private idToDelete : number = 0;
   private admin : boolean = false;
+  private busca : string;
 
 
   constructor(private resService : ReservaService,
@@ -79,6 +80,19 @@ export class ReservaComponent implements OnInit {
 
   cancelaDelete(){
     this.idToDelete = 0;
+  }
+
+  search(event){
+    this.requisitando = true;
+    this.resService.getReservasSeacrh(this.busca)
+    .then((response) => {
+      this.listaReservas = response;
+      this.requisitando = false;
+    })
+    .catch(() => {
+      this.requisitando = false;
+      this.mostraErro("Ops, houve um erro durante sua busca, tente novamente ou entre em contato!");
+    });
   }
 
   mostraSucesso(msg : string){

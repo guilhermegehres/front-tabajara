@@ -33,7 +33,7 @@ export class LoginComponent implements OnInit {
         window.localStorage.setItem("token" , response.token);
         window.localStorage.setItem("tipo", response.tipo);
         response.token = null;
-        window.localStorage.setItem("user", response);
+        window.localStorage.setItem("user", JSON.stringify(response));
         this.router.navigateByUrl('reserva');
       })
       .catch((http) => {

@@ -19,6 +19,7 @@ import { ApartamentoService } from './service/apartamento.service';
 import {MdDialog, OVERLAY_PROVIDERS, MdNativeDateModule} from '@angular/material';
 import { CreateReservaComponent } from './create-reserva/create-reserva.component';
 import { UnauthComponent } from './unauth/unauth.component';
+import { NovoUserComponent } from './novo-user/novo-user.component';
 
 
 @NgModule({
@@ -28,7 +29,8 @@ import { UnauthComponent } from './unauth/unauth.component';
     ReservaComponent,
     MenuTopoComponent,
     CreateReservaComponent,
-    UnauthComponent
+    UnauthComponent,
+    NovoUserComponent
   ],
   imports: [
     BrowserModule,

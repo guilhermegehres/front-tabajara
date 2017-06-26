@@ -11,5 +11,4 @@ export class AluguelService {
     return this.http.post("/aluguel", aluguel)
     .then();
   }
-
 }

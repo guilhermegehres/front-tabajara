@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpHandler } from './../http.handler';
+import { URLSearchParams } from '@angular/http';
 
 
 @Injectable()
@@ -9,6 +10,13 @@ export class ReservaService {
 
   getReservas() : any{
     return this.http.get("/reserva")
+    .then();
+  }
+  
+  getReservasSeacrh(search : string) : any{
+    let params : URLSearchParams = new URLSearchParams();
+    params.append('search', search)
+    return this.http.get("/reserva/search", params)
     .then();
   }
 

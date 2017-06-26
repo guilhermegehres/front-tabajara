@@ -10,9 +10,18 @@
     <md-progress-bar mode="indeterminate"></md-progress-bar>
 </div>
 <div class="botoes">
-    <a md-button routerLink="/newReserva">
-        <i class="material-icons">add</i>
-    </a>
+    <md-grid-list class="lista" cols="2" rowHeight="40px">
+        <md-grid-tile>
+            <a md-button routerLink="/newReserva">
+                <i class="material-icons">add</i>
+            </a>
+        </md-grid-tile>
+        <md-grid-tile>
+            <md-input-container>
+                <input mdInput placeholder="Busca" [(ngModel)]="busca" (keyup)="search(event)">
+            </md-input-container>
+        </md-grid-tile>
+    </md-grid-list>
 </div>
 <md-grid-list class="lista" cols="8" rowHeight="20px">
   <md-grid-tile>ID</md-grid-tile>
@@ -35,7 +44,7 @@
             <md-grid-tile>{{ entry.dataFim | date : "dd/MM/yyyy" }}</md-grid-tile>
             <md-grid-tile>{{ entry.valor }}</md-grid-tile>
             <md-grid-tile>
-                <div class="botoes" *ngIf="entry.reservado == 0">
+                <div *ngIf="entry.reservado == 0">
                     <a class="success" (click)="confirmaReserva(entry)">
                         <i class="material-icons">done</i>
                     </a>
