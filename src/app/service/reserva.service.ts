@@ -12,10 +12,14 @@ export class ReservaService {
     return this.http.get("/reserva")
     .then();
   }
+
+  getReserva(id : number){
+    return this.http.get("/reserva/"+id).then();
+  }
   
   getReservasSeacrh(search : string) : any{
     let params : URLSearchParams = new URLSearchParams();
-    params.append('search', search)
+    params.append('search', search);
     return this.http.get("/reserva/search", params)
     .then();
   }

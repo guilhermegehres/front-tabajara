@@ -35,7 +35,7 @@
 </md-grid-list>
 
 <div *ngIf="listaReserva == undefined">
-    <md-grid-list cols="8" rowHeight="40px" *ngFor="let entry of listaReservas">
+    <md-grid-list cols="8" class="corsim-cornao" rowHeight="40px" *ngFor="let entry of listaReservas">
         <div class="btn">
             <md-grid-tile>{{ entry.id }}</md-grid-tile>
             <md-grid-tile>{{ entry.user.nome }}</md-grid-tile>
@@ -45,12 +45,16 @@
             <md-grid-tile>{{ entry.valor }}</md-grid-tile>
             <md-grid-tile>
                 <div *ngIf="entry.reservado == 0">
-                    <a class="success" (click)="confirmaReserva(entry)">
+                    <a class="success" *ngIf="isAdmin" (click)="confirmaReserva(entry)">
                         <i class="material-icons">done</i>
                     </a>
                     <a class="danger" (click)="cancelaReserva(entry.id)">
                         <i class="material-icons">delete</i>
                     </a>
+                    <!--
+                    <a class="danger" [routerLink]="['/newReserva', entry.id]">
+                        <i class="material-icons">mode_edit</i>
+                    </a>-->
                 </div>
                 <div *ngIf="entry.reservado == 1">
                     <a class="info">

@@ -7,9 +7,12 @@ import { Router } from "@angular/router";
 })
 export class MenuTopoComponent implements OnInit {
 
-  constructor(private router : Router) { }
+  private user : any;
+  constructor(private router : Router) {
+  }
 
   ngOnInit() {
+    this.user = JSON.parse(window.localStorage.getItem("user"));
   }
 
   logout(){

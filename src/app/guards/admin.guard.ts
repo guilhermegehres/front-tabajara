@@ -8,9 +8,10 @@ export class AdminGuard implements CanActivate {
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
-    if(window.localStorage.getItem("tipo") == "1"){//tipo admin
+    return true;
+    /*if(window.localStorage.getItem("tipo") == "1"){//tipo admin
       return true;
     }
-    this.router.navigateByUrl("unauth");
+    this.router.navigateByUrl("unauth");*/
   }
 }

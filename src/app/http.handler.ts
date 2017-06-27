@@ -12,10 +12,12 @@ export class HttpHandler {
     private headers : Headers;
 
     setHeader(token){
-        this.headers = new Headers({
-            'Content-Type': 'application/json',
-            "Authorization" : token
-        });
+        if(token != null || token != "" || token != undefined){
+            this.headers = new Headers({
+                'Content-Type': 'application/json',
+                "Authorization" : token
+            });
+        }
     }
 
     constructor(private http: Http) {}

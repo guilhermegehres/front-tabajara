@@ -17,7 +17,7 @@ export class ReservaComponent implements OnInit {
   private msgErro : string = null;
   private requisitando : boolean = false;
   private idToDelete : number = 0;
-  private admin : boolean = false;
+  private isAdmin : boolean = false;
   private busca : string;
 
 
@@ -30,7 +30,7 @@ export class ReservaComponent implements OnInit {
     this.getReservas();
     let tipo : string = window.localStorage.getItem("tipo");
     if(tipo == "1"){
-      this.admin = true;
+      this.isAdmin = true;
     }
   }
 
@@ -38,7 +38,7 @@ export class ReservaComponent implements OnInit {
     this.requisitando = true;
     this.resService.getReservas()
     .then((response) => {this.listaReservas = response; this.requisitando = false;})
-    .catch(() => {this.mostraErro("houve um erro!") ; this.requisitando = false;});
+    .catch((response) => {this.mostraErro("houve um erro!") ; this.requisitando = false;});
   }
 
   confirmaReserva(reserva : any){

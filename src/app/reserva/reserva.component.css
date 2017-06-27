@@ -1,5 +1,8 @@
-md-grid-list:nth-child(even){
+.corsim-cornao:nth-child(even){
     background-color:#f2f2f2; 
+}
+.corsim-cornao{
+    height: 40px;
     line-height: 40px;
     border-radius: 2px;
 }
