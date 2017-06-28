@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from "@angular/router";
+import { UtilService } from "./../service/util.service";
 @Component({
   selector: 'app-menu-topo',
   templateUrl: './menu-topo.component.html',
@@ -8,7 +9,10 @@ import { Router } from "@angular/router";
 export class MenuTopoComponent implements OnInit {
 
   private user : any;
-  constructor(private router : Router) {
+  constructor(
+    private router : Router,
+    private util : UtilService
+  ) {
   }
 
   ngOnInit() {
@@ -19,6 +23,7 @@ export class MenuTopoComponent implements OnInit {
     window.localStorage.removeItem("token");
     window.localStorage.removeItem("user");
     window.localStorage.removeItem("tipo");
+    this.util.userToEdit = null;
     this.router.navigateByUrl("login");
   }
 

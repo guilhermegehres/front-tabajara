@@ -1,0 +1,49 @@
+<app-menu-topo></app-menu-topo>
+
+<div class="alert alert-success mensagem" *ngIf="msgSucesso != null">
+    {{msgSucesso}}
+</div>
+<div class="alert alert-danger mensagem" *ngIf="msgErro != null">
+    {{msgErro}}
+</div>
+<div *ngIf="requisitando" class="alert alert-info">
+    <md-progress-bar mode="indeterminate"></md-progress-bar>
+</div>
+<div class="botoes">
+    <md-grid-list class="lista" cols="1" rowHeight="40px">
+        <md-grid-tile>
+            <md-input-container>
+                <input mdInput placeholder="Busca" [(ngModel)]="busca" (keyup)="search(event)">
+            </md-input-container>
+        </md-grid-tile>
+    </md-grid-list>
+</div>
+
+<md-grid-list class="lista" cols="7" rowHeight="20px">
+  <md-grid-tile>ID</md-grid-tile>
+  <md-grid-tile>Cpf</md-grid-tile>
+  <md-grid-tile>Email</md-grid-tile>
+  <md-grid-tile>Nome</md-grid-tile>
+  <md-grid-tile>Tipo</md-grid-tile>
+  <md-grid-tile></md-grid-tile>
+  <md-grid-tile></md-grid-tile>
+</md-grid-list>
+
+<div *ngIf="users != undefined">
+    <md-grid-list cols="7" class="corsim-cornao" rowHeight="40px" *ngFor="let entry of users">
+        <div class="btn">
+            <md-grid-tile>{{ entry.id }}</md-grid-tile>
+            <md-grid-tile>{{ entry.cpf }}</md-grid-tile>
+            <md-grid-tile>{{ entry.email }}</md-grid-tile>
+            <md-grid-tile>{{ entry.nome }}</md-grid-tile>
+            <md-grid-tile>{{ entry.tipo }}</md-grid-tile>
+            <md-grid-tile>
+                <div>
+                    <a class="info" (click)="editUser(entry)">
+                        <i class="material-icons">edit</i>
+                    </a>
+                </div>
+            </md-grid-tile>
+        </div>
+    </md-grid-list>
+</div>

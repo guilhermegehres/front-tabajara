@@ -54,7 +54,7 @@ export class HttpHandler {
         this.setHeader(window.localStorage.getItem('token'));
         return this.http.put(this.url+path+"/"+id, bodyJson, {headers : this.headers})
         .toPromise()
-        .then( res => {res;console.log(res.json())})
+        .then( res => res.json())
         .catch( err => this.handleError(err))
     }
 

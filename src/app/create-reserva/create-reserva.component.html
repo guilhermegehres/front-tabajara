@@ -34,9 +34,11 @@
         </md-select>
       </md-grid-tile>
       <md-grid-tile>
+        valor a ser calculado {{valor | currency:'BRL':true:'2.2-2'}}
+        <!--
         <md-input-container>
           <input mdInput disabled [(ngModel)]="valor" placeholder="valor a ser calculado">
-        </md-input-container>
+        </md-input-container>-->
       </md-grid-tile>
       <md-grid-tile>
         <a md-button (click)="salvarReserva()" class="alert-info">Salvar</a>

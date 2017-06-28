@@ -4,6 +4,9 @@ import { HttpHandler } from './../http.handler';
 
 @Injectable()
 export class UtilService{
+
+    public userToEdit : any;
+
     formataDataBanco(data : Date) : any{
         let dia : any = data.getDate();
         if (dia.toString().length == 1){
@@ -14,6 +17,21 @@ export class UtilService{
             mes = "0"+mes;
         let ano = data.getFullYear();  
         return ano+"-"+mes+"-"+dia;
+    }
+
+    isEmptyUserToEdit() : any {
+        if(this.userToEdit == null || this.userToEdit == undefined){
+            return false;
+        }
+        return this.userToEdit;
+    }
+
+    isLogged() : boolean{
+        let user = window.localStorage.getItem("user");
+        if(user == null){
+            return false;
+        }
+        return true;
     }
 
     calculaDifData(date1, date2){

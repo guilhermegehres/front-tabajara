@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UtilService } from "./../service/util.service";
 import { UserService } from "./../service/user.service";
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-novo-user',
@@ -15,18 +16,37 @@ export class NovoUserComponent implements OnInit {
   private email : string;
   private senha : string;
   private cpf : string;
+  private isLogged : boolean = false;
+  private isEdit : boolean = false;
+  private user : any;
+  private type : any = 2;
 
   constructor(private util : UtilService,
-              private uService : UserService
+              private uService : UserService,
+              private router : Router
   ) { }
 
   ngOnInit() {
+    this.isLogged = this.util.isLogged();
+    if(this.util.userToEdit != null && this.util.userToEdit != undefined && this.util.userToEdit != ""){
+      this.setUserData(this.util.userToEdit);
+      this.isEdit = true;
+      console.log(this.util.userToEdit);
+      this.type = this.util.userToEdit.tipo;
+    }
   }
 
-  createUser() : any{
+  setUserData(user : any){
+    this.nome = user.nome;
+    this.email = user.email;
+    this.cpf = user.cpf;
+    this.senha = user.senha;
+  }
+
+  saveUser() : any{
     if(this.validaCampos()){
       this.requisitando = true;
-      this.uService.createUser({
+      this.user = {
         "nome": this.nome,
         "email": this.email,
         "senha": this.senha,
@@ -35,20 +55,32 @@ export class NovoUserComponent implements OnInit {
         "alugueis": null,
         "reservas": null,
         "cpf": this.cpf
-      })
-      .then((response) => {
-        this.erro = null;
-        this.requisitando = false;
-        if(response.success == false){
-          this.erro = response.err;
-        }else{
-          this.uService.login(response.email, response.senha);
-        }
-      })
-      .catch((response) => {
-        this.erro = "ops! Houve um erro, tente novamente!";
-        this.requisitando = false;
-      });
+      };
+      if(!this.isEdit){
+        this.uService.createUser(this.user)
+        .then((response) => {
+          this.erro = null;
+          this.requisitando = false;
+          if(response.success == false){
+            this.erro = response.err;
+          }else{
+            this.uService.login(response.email, response.senha);
+          }
+        })
+        .catch((response) => {
+          this.erro = "ops! Houve um erro, tente novamente!";
+          this.requisitando = false;
+        });
+      }else{
+        this.uService.updateUser(this.user,this.util.userToEdit.id)
+        .then((response) => {
+          this.router.navigateByUrl("usuarios");
+        })
+        .catch((response) => {
+          this.erro = "ops! Houve um erro, tente novamente!";
+          this.requisitando = false;
+        });
+      }
     }
   }
 
@@ -56,7 +88,7 @@ export class NovoUserComponent implements OnInit {
     this.erro = null;
     let msg = "";
     let valido = true;
-    if(this.cpf == null || this.cpf == undefined || this.cpf == "" || !this.util.validaCpf(this.cpf)){
+    if(this.cpf == null || this.cpf == undefined || this.cpf == "" || !this.util.validaCpf(String(this.cpf))){
       msg = msg + "Campo cpf inválido!"
       valido = false;
     }

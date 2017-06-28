@@ -1,8 +1,10 @@
+<app-menu-topo *ngIf="isLogged"></app-menu-topo>
+
 <md-grid-list cols="3" rowHeight="480px">
   <md-grid-tile></md-grid-tile>
   <md-grid-tile>
     <md-card>
-      <md-card-title>Novo usuário</md-card-title>
+      <md-card-title>Cadastro usuário</md-card-title>
       <div *ngIf="erro != null" class="alert alert-danger">
         {{erro}}
       </div>
@@ -22,7 +24,7 @@
         <md-input-container>
           <input mdInput placeholder="Senha" type="password" [(ngModel)]="senha">
         </md-input-container>
-        <button md-button (click)="createUser()">Pronto!</button>
+        <button md-button (click)="saveUser()">Pronto!</button>
       </md-card-content>
     </md-card>
   </md-grid-tile>

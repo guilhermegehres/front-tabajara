@@ -21,6 +21,8 @@ import {MdDialog, OVERLAY_PROVIDERS, MdNativeDateModule} from '@angular/material
 import { CreateReservaComponent } from './create-reserva/create-reserva.component';
 import { UnauthComponent } from './unauth/unauth.component';
 import { NovoUserComponent } from './novo-user/novo-user.component';
+import { AluguelComponent } from './aluguel/aluguel.component';
+import { ListaUsuariosComponent } from './lista-usuarios/lista-usuarios.component';
 
 
 @NgModule({
@@ -31,7 +33,9 @@ import { NovoUserComponent } from './novo-user/novo-user.component';
     MenuTopoComponent,
     CreateReservaComponent,
     UnauthComponent,
-    NovoUserComponent
+    NovoUserComponent,
+    AluguelComponent,
+    ListaUsuariosComponent
   ],
   imports: [
     BrowserModule,

@@ -14,6 +14,23 @@ export class UserService {
   createUser(user : any) : any {
       return this.http.post("/user", user).then();
   }
+  getUsers() : any{
+    return this.http.get("/user")
+    .then();
+  }
+  deleteUser(id : number) : any{
+    return this.http.delete("/user", id).then();
+  }
+  getUsersSeacrh(search : string) : any{
+    let params : URLSearchParams = new URLSearchParams();
+    params.append('search', search);
+    return this.http.get("/user/search/", params)
+    .then();
+  }
+
+  updateUser(user, id) : any{
+    return this.http.put('/user', user, id).then();
+  }
 
   login(email, senha){
     this.http.post("/user/login",{

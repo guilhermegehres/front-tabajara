@@ -5,7 +5,8 @@
   <div>
     <ul>
       <li><a routerLink="/reserva" routerLinkActive="selected" md-button>Reservas</a></li>
-      <li><a md-button>Aluguel</a></li>
+      <li><a routerLink="/aluguel" md-button>Aluguel</a></li>
+      <li *ngIf="user.tipo == 1"><a routerLink="/usuarios" md-button>Usuários</a></li>
       <li><a md-button (click)="logout()">Logout</a></li>
     </ul>
   </div>

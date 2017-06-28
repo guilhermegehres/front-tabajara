@@ -1,0 +1,61 @@
+<app-menu-topo></app-menu-topo>
+
+<div class="alert alert-success mensagem" *ngIf="msgSucesso != null">
+    {{msgSucesso}}
+</div>
+<div class="alert alert-danger mensagem" *ngIf="msgErro != null">
+    {{msgErro}}
+</div>
+<div *ngIf="requisitando" class="alert alert-info">
+    <md-progress-bar mode="indeterminate"></md-progress-bar>
+</div>
+<div class="botoes">
+    <md-grid-list class="lista" cols="1" rowHeight="40px">
+        <md-grid-tile>
+            <md-input-container>
+                <input mdInput placeholder="Busca" [(ngModel)]="busca" (keyup)="search(event)">
+            </md-input-container>
+        </md-grid-tile>
+    </md-grid-list>
+</div>
+
+<md-grid-list class="lista" cols="8" rowHeight="20px">
+  <md-grid-tile>ID</md-grid-tile>
+  <md-grid-tile>User</md-grid-tile>
+  <md-grid-tile>Apartamento</md-grid-tile>
+  <md-grid-tile>Data inicio</md-grid-tile>
+  <md-grid-tile>Data fim</md-grid-tile>
+  <md-grid-tile>Valor</md-grid-tile>
+  <md-grid-tile></md-grid-tile>
+  <md-grid-tile></md-grid-tile>
+</md-grid-list>
+
+<div *ngIf="listaAlugueis != undefined">
+    <md-grid-list cols="8" class="corsim-cornao" rowHeight="40px" *ngFor="let entry of listaAlugueis">
+        <div class="btn">
+            <md-grid-tile>{{ entry.id }}</md-grid-tile>
+            <md-grid-tile>{{ entry.user.nome }}</md-grid-tile>
+            <md-grid-tile>{{ entry.apartamento.tipo }}</md-grid-tile>
+            <md-grid-tile>{{ entry.dataInicio | date : "dd/MM/yyyy" }}</md-grid-tile>
+            <md-grid-tile>{{ entry.dataFim | date : "dd/MM/yyyy" }}</md-grid-tile>
+            <md-grid-tile>{{ entry.valor }}</md-grid-tile>
+            <md-grid-tile>
+                <div *ngIf="isAdmin">
+                    <a class="danger" (click)="cancelaAluguel(entry.id)">
+                        <i class="material-icons">delete</i>
+                    </a>
+                </div>
+            </md-grid-tile>
+            <md-grid-tile>
+                <div class="botoes" *ngIf="idToDelete == entry.id">Excluir?
+                    <a class="success" (click)="confirmaDelete(idToDelete)">
+                        <i class="material-icons">done</i>
+                    </a>
+                    <a class="danger" (click)="cancelaDelete()">
+                        <i class="material-icons">highlight_off</i>
+                    </a>
+                </div>
+            </md-grid-tile>
+        </div>
+    </md-grid-list>
+</div>

@@ -29,7 +29,6 @@ export class LoginComponent implements OnInit {
         "senha": this.senha
       })
       .then((response) => {
-        console.log(response);
         window.localStorage.setItem("token" , response.token);
         window.localStorage.setItem("tipo", response.tipo);
         response.token = null;
